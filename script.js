@@ -12,6 +12,10 @@ Book.prototype.toggleRead = function() {
     else this.read = false;
 }
 
+function openCloseForm() {
+    document.querySelector('.form'). classList.toggle('active');
+}
+
 function eraseForm() {
     const form = document.querySelector('.form');
     const formElements = form.querySelectorAll('input');
@@ -24,6 +28,7 @@ function eraseForm() {
 }
 
 function addBookToLibrary() {
+    openCloseForm();
     let book = new Book(document.getElementById('title').value, document.getElementById('author').value, document.getElementById('pages').value, document.getElementById('read').checked);
     myLibrary.push(book);
     eraseForm();
@@ -83,7 +88,10 @@ function toggleRead(book, e) {
     }
 }
 
-document.querySelector('.add-book').addEventListener('click', addBookToLibrary)
+document.querySelector('.form').addEventListener('submit', e => {
+    e.preventDefault();
+    addBookToLibrary();
+})
 
 document.addEventListener('click', click => {
     let books = document.querySelectorAll('.book');
@@ -91,3 +99,4 @@ document.addEventListener('click', click => {
     books.forEach(book  => toggleRead(book, click));
 })
 
+document.querySelector('.open-form').addEventListener('click', openCloseForm)

@@ -12,8 +12,12 @@ Book.prototype.toggleRead = function() {
     else this.read = false;
 }
 
-function openCloseForm() {
-    document.querySelector('.form'). classList.toggle('active');
+function openCloseForm(e) {
+    let form = document.querySelector('.form-container');
+    let openForm = document.querySelector('.open-form');
+    if (e.target === form || e.target === openForm) {
+        form.classList.toggle('active');
+    }
 }
 
 function eraseForm() {
@@ -28,7 +32,6 @@ function eraseForm() {
 }
 
 function addBookToLibrary() {
-    openCloseForm();
     let book = new Book(document.getElementById('title').value, document.getElementById('author').value, document.getElementById('pages').value, document.getElementById('read').checked);
     myLibrary.push(book);
     eraseForm();
@@ -45,7 +48,7 @@ function displayLibrary(library = myLibrary) {
         book.setAttribute('data-number', `${library.indexOf(element)}`);
 
         let title = document.createElement('p');
-        title.textContent = element.title;
+        title.textContent = `"${element.title}"`;
         book.appendChild(title);
 
         let author = document.createElement('p');
@@ -53,13 +56,26 @@ function displayLibrary(library = myLibrary) {
         book.appendChild(author);
 
         let pages = document.createElement('p');
-        pages.textContent = element.pages;
+        pages.textContent = `Pages: ${element.pages}`;
         book.appendChild(pages);
 
+        let readLabel = document.createElement('label');
+        readLabel.setAttribute('for', 'read-book');
+        readLabel.textContent = 'Read:';
+
         let read = document.createElement('input');
+        read.setAttribute('id', 'read-book');
         read.setAttribute('type', 'checkbox');
         read.checked = element.read;
-        book.appendChild(read);
+
+        let div = document.createElement('div')
+        div.classList.add('checkbox-container');
+        div.appendChild(readLabel);
+        div.appendChild(read);
+        book.appendChild(div)
+
+
+
 
         let removeButton = document.createElement('button');
         removeButton.classList.add('remove-button');
@@ -90,6 +106,7 @@ function toggleRead(book, e) {
 
 document.querySelector('.form').addEventListener('submit', e => {
     e.preventDefault();
+    document.querySelector('.form-container').classList.toggle('active');
     addBookToLibrary();
 })
 
@@ -99,4 +116,4 @@ document.addEventListener('click', click => {
     books.forEach(book  => toggleRead(book, click));
 })
 
-document.querySelector('.open-form').addEventListener('click', openCloseForm)
+document.addEventListener('click', openCloseForm, 'click')

@@ -11,27 +11,29 @@
 <body>
     <header class="title">
         <h1>Your Library</h1>
+        <button class="open-form">New Book</button>
     </header>
-    <button class="open-form">New Book</button>
-    <form class="form" action="">
-        <div>
-            <label for="title">Title:</label>
-            <input type="text" name="title" id="title" required>
-        </div>
-        <div>
-            <label for="author">Author:</label>
-            <input type="text" name="author" id="author" required>
-        </div>
-        <div>
-            <label for="pages">Pages:</label>
-            <input type="number" name="pages" id="pages" required>
-        </div>
-        <div>
-            <label for="read">Read:</label>
-            <input type="checkbox" name="read" id="read">
-        </div>
-        <button class="add-book" type="submit">Add</button>
-    </form>
+    <div class="form-container">
+        <form class="form" action="">
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" required>
+            </div>
+            <div>
+                <label for="author">Author:</label>
+                <input type="text" name="author" id="author" required>
+            </div>
+            <div>
+                <label for="pages">Pages:</label>
+                <input type="number" name="pages" id="pages" required>
+            </div>
+            <div>
+                <label for="read">Read:</label>
+                <input type="checkbox" name="read" id="read">
+            </div>
+            <button class="add-book" type="submit">Add</button>
+        </form>
+    </div>
     <div class="library">
     </div>
 </body>
